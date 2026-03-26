@@ -493,6 +493,15 @@ button:focus-visible {
   object-fit: cover;
   display: block;
 }
+.hero-visual-card-lifestyle {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.hero-visual-card-lifestyle .hero-card-image {
+  object-position: center center;
+}
 .hero-visual-glow {
   position: absolute;
   inset: -30%;
@@ -1856,12 +1865,11 @@ button:focus-visible {
 }
 .story-section-bg {
   position: absolute;
-  top: 10%;
-  right: -5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(160, 202, 119, 0.15) 0%, transparent 70%);
-  border-radius: 50%;
+  inset: 0;
+  z-index: 0;
+  background: url('../assets/our-story-visual-bg.png') no-repeat center center;
+  background-size: min(75%, 680px) auto;
+  opacity: 0.45;
   pointer-events: none;
 }
 .our-story-section .container {
@@ -1911,39 +1919,64 @@ button:focus-visible {
 }
 
 .story-origin-wrap {
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto 3rem;
 }
 .story-origin-card {
-  background: var(--white);
-  padding: 2rem 2.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(0, 61, 32, 0.08);
+  background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+  padding: 2.5rem 3rem;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 24px rgba(0, 61, 32, 0.06), 0 0 0 1px rgba(160, 202, 119, 0.15);
   border: 1px solid var(--gray-100);
   position: relative;
   overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.25s ease;
-}
-.story-origin-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(0, 61, 32, 0.12);
-  border-color: rgba(160, 202, 119, 0.4);
 }
 .story-origin-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
+  width: 5px;
   height: 100%;
   background: linear-gradient(180deg, var(--mist-green), var(--deep-green));
-  border-radius: 4px 0 0 4px;
+  border-radius: 5px 0 0 5px;
+}
+.story-origin-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(160, 202, 119, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.story-origin-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0, 61, 32, 0.1), 0 0 0 1px rgba(160, 202, 119, 0.2);
+  border-color: rgba(160, 202, 119, 0.3);
+}
+.story-origin-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mist-green);
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(160, 202, 119, 0.12);
+  border-radius: var(--radius-full);
 }
 .story-origin-text {
   font-size: 1.0625rem;
-  line-height: 1.75;
+  line-height: 1.85;
   color: var(--gray-800);
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 .story-origin-text strong {
   color: var(--deep-green);
@@ -2067,6 +2100,34 @@ button:focus-visible {
 .btn-outline-dark:hover {
   background: var(--deep-green);
   color: var(--white);
+}
+
+/* ---- Team intro (Our Story page) ---- */
+.team-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+}
+.team-intro-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--deep-green);
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem;
+}
+.team-intro-tagline {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--mist-green);
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+}
+.team-intro-text {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--gray-700);
+  margin: 0;
 }
 
 /* ---- Team (Our Story page: photo, position, LinkedIn) ---- */
