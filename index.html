@@ -20,9 +20,10 @@
     </div>
     <div class="main-nav">
       <div class="container nav-inner">
-        <a href="index.html" class="logo">
-          <span class="logo-text">AERONEX</span>
-          <span class="logo-labs">LABS</span>
+        <a href="index.html" class="logo logo--svg" aria-label="AeroNex Labs">
+          <span class="logo-svg-wrap" aria-hidden="true">
+            <img src="assets/aeronex-labs-wordmark.svg" alt="" class="logo-svg" />
+          </span>
         </a>
         <nav class="nav" aria-label="Main navigation">
           <ul class="nav-list">
@@ -104,7 +105,7 @@
             </div>
             <div class="hero-split-visual">
               <div class="hero-visual-card hero-visual-card-img">
-                <img src="assets/hero-app-control.png" alt="AeroMist app" class="hero-card-image" />
+                <img src="assets/phone.png" alt="AeroMist app on phone" class="hero-card-image" />
               </div>
             </div>
           </div>
@@ -340,16 +341,67 @@
     </section>
 
     <section id="how-it-works" class="section how-split-section">
-      <div class="how-split">
+      <div id="how-split-hero" class="how-split">
         <div class="how-split-content animate-in">
           <span class="how-split-label">How it works</span>
           <h2 class="how-split-title">AeroMist: How it works</h2>
           <p class="how-split-text">Get fresh herbs, veggies, and more right from your countertop.</p>
-          <a href="#product" class="btn btn-primary how-split-cta">Learn more</a>
+          <button
+            type="button"
+            class="btn btn-primary how-split-cta"
+            id="how-learn-more-btn"
+            aria-expanded="false"
+            aria-controls="how-split-steps"
+          >
+            Learn more
+          </button>
         </div>
         <div class="how-split-visual animate-in">
           <div class="how-split-visual-inner">
             <img src="assets/aeromist-device.png" alt="AeroMist device with plants and grow lights" />
+          </div>
+        </div>
+      </div>
+      <div id="how-split-steps" class="how-steps-wrap" role="region" aria-labelledby="how-steps-title" hidden>
+        <div class="how-steps-inner">
+          <div class="how-steps-header">
+            <h2 class="how-steps-title" id="how-steps-title">How to use AeroMist</h2>
+            <button type="button" class="btn btn-outline how-steps-back" id="how-steps-close">Back</button>
+          </div>
+          <div class="how-steps-body">
+            <ol class="how-steps-list" role="list">
+              <li class="how-steps-item">
+                <span class="how-steps-num" aria-hidden="true">1</span>
+                <div class="how-steps-copy">
+                  <h3 class="how-steps-heading">Connect your Android phone</h3>
+                  <p>Get the AeroMist app on <strong>Google Play</strong>, sign in, and connect your unit over Wi‑Fi. Sensors, schedules, and history stay with you wherever you open the app.</p>
+                </div>
+              </li>
+              <li class="how-steps-item">
+                <span class="how-steps-num" aria-hidden="true">2</span>
+                <div class="how-steps-copy">
+                  <h3 class="how-steps-heading">Set misting &amp; lights</h3>
+                  <p>Pick how often and how long it mists, line up the grow lights with your plants, or switch to Auto when you want it to run itself. Tap <strong>Mist now</strong> whenever you want an extra burst.</p>
+                </div>
+              </li>
+              <li class="how-steps-item">
+                <span class="how-steps-num" aria-hidden="true">3</span>
+                <div class="how-steps-copy">
+                  <h3 class="how-steps-heading">Monitor on the app or the LED</h3>
+                  <p>See temperature, humidity, water, and mist status on your Android phone, or check the same kind of readout on the <strong>built-in LED screen</strong> on the front when you are next to the unit.</p>
+                </div>
+              </li>
+            </ol>
+            <figure class="how-steps-figure">
+              <div class="how-split-visual-inner how-steps-figure-card">
+                <img
+                  src="assets/how-it-works-steps.png"
+                  alt="AeroMist hexagonal tower with top grow canopy and front LED display, Android phone with green dashboard beside it"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </figure>
           </div>
         </div>
       </div>
@@ -447,6 +499,18 @@
             </div>
             <span class="feature-card-toggle" aria-hidden="true"></span>
           </li>
+          <li class="feature-card feature-card--physical" tabindex="0" role="button" aria-expanded="false" data-feature>
+            <span class="feature-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+            </span>
+            <h3>Size &amp; misting</h3>
+            <p class="feature-card-summary">32 × 20 cm footprint · 56 cm tall · 6 misting nozzles.</p>
+            <div class="feature-card-detail">
+              <p><strong>Dimensions:</strong> Compact for a counter or shelf—32 × 20 cm footprint, 56 cm height.</p>
+              <p><strong>Nozzles:</strong> Six misting nozzles spread fine mist evenly across the grow area.</p>
+            </div>
+            <span class="feature-card-toggle" aria-hidden="true"></span>
+          </li>
         </ul>
       </div>
     </section>
@@ -475,7 +539,7 @@
             <h3 class="pricing-card-title">AeroMist Starter</h3>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
-              <span class="pricing-amount">499</span>
+              <span class="pricing-amount">299</span>
             </div>
             <p class="pricing-card-subtitle">Perfect for beginners and home enthusiasts</p>
             <ul class="pricing-features">
@@ -494,7 +558,7 @@
             <h3 class="pricing-card-title">AeroMist Pro</h3>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
-              <span class="pricing-amount">799</span>
+              <span class="pricing-amount">499</span>
             </div>
             <p class="pricing-card-subtitle">For serious growers and small farms</p>
             <ul class="pricing-features">
@@ -533,7 +597,7 @@
             <div class="testimonial-author">
               <div class="testimonial-avatar">S</div>
               <div>
-                <div class="testimonial-name">Sarah Johnson</div>
+                <div class="testimonial-name">Selin Yılmaz</div>
                 <div class="testimonial-role">Home Chef · Alpha Tester</div>
               </div>
             </div>
@@ -550,7 +614,7 @@
             <div class="testimonial-author">
               <div class="testimonial-avatar">M</div>
               <div>
-                <div class="testimonial-name">Michael Chen</div>
+                <div class="testimonial-name">Murat Çelik</div>
                 <div class="testimonial-role">Urban Farmer · Beta Tester</div>
               </div>
             </div>
@@ -567,7 +631,7 @@
             <div class="testimonial-author">
               <div class="testimonial-avatar">E</div>
               <div>
-                <div class="testimonial-name">Emma Rodriguez</div>
+                <div class="testimonial-name">Elif Şahin</div>
                 <div class="testimonial-role">IoT Engineer · Prototype Tester</div>
               </div>
             </div>
@@ -584,7 +648,7 @@
             <div class="testimonial-author">
               <div class="testimonial-avatar">D</div>
               <div>
-                <div class="testimonial-name">David Park</div>
+                <div class="testimonial-name">Deniz Aydın</div>
                 <div class="testimonial-role">Restaurant Owner · Early Adopter</div>
               </div>
             </div>
@@ -643,7 +707,7 @@
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
             <div class="faq-answer">
-              <p>The complete system includes: AeroMist device with ESP32 controller, SHT31 temperature & humidity sensors, ultrasonic misting pump, 2.8" LCD display, full-spectrum LED grow lights, water reservoir with float switch, plant holders, power adapter, quick start guide, and 1-year access to the Android mobile app.</p>
+              <p>The complete system includes: AeroMist device with ESP32 controller, SHT31 temperature & humidity sensors, ultrasonic misting pump, 2.8" LCD display, full-spectrum LED grow lights, water reservoir with float switch, plant holders, power adapter, quick start guide, and access to the Android mobile app.</p>
             </div>
           </div>
           <div class="faq-item" data-faq>
@@ -692,7 +756,7 @@
               </div>
               <div>
                 <h3>Email us</h3>
-                <a href="mailto:contact@aeronexlabs.com">contact@aeronexlabs.com</a>
+                <a href="mailto:info@aeronexlabs.com">info@aeronexlabs.com</a>
               </div>
             </div>
             <div class="contact-info-card">
@@ -710,7 +774,7 @@
               </div>
               <div>
                 <h3>Project</h3>
-                <p>AeroNex Labs · Team 11<br/>GE 401 Capstone Project</p>
+                <p>AeroNex Labs · Team 11<br/>Ge 401/402 Project</p>
               </div>
             </div>
           </div>

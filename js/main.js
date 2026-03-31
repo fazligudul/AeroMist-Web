@@ -114,6 +114,31 @@
     });
   });
 
+  // How it works: Learn more → 3-step guide (replaces hero row)
+  var howLearnMore = document.getElementById('how-learn-more-btn');
+  var howHero = document.getElementById('how-split-hero');
+  var howSteps = document.getElementById('how-split-steps');
+  var howStepsClose = document.getElementById('how-steps-close');
+  if (howLearnMore && howHero && howSteps) {
+    howLearnMore.addEventListener('click', function () {
+      howHero.setAttribute('hidden', '');
+      howSteps.removeAttribute('hidden');
+      howLearnMore.setAttribute('aria-expanded', 'true');
+      if (howStepsClose) {
+        howStepsClose.focus();
+      }
+      howSteps.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+  if (howStepsClose && howHero && howSteps && howLearnMore) {
+    howStepsClose.addEventListener('click', function () {
+      howSteps.setAttribute('hidden', '');
+      howHero.removeAttribute('hidden');
+      howLearnMore.setAttribute('aria-expanded', 'false');
+      howLearnMore.focus();
+    });
+  }
+
   // Stats strip: count-up animation when in view
   var statsStrip = document.getElementById('stats-strip');
   var statValues = document.querySelectorAll('.stat-value[data-count]');
