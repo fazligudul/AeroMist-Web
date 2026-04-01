@@ -2461,7 +2461,6 @@ button:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .story-values .values-list { grid-template-columns: 1fr; }
   .story-origin-card { padding: 1.5rem 1.75rem; }
   .story-origin-text { font-size: 1.0625rem; }
 }
@@ -2829,12 +2828,99 @@ button:focus-visible {
   width: 22px;
   height: 22px;
 }
-@media (max-width: 500px) {
-  .team-members-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: none; }
+@media (max-width: 900px) {
+  .story-values .values-list {
+    gap: 1.125rem;
+  }
+
+  .team-members-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 1.25rem;
+    max-width: 680px;
+  }
+
   .team-member-card:nth-child(6),
-  .team-member-card:nth-child(7) { grid-column: auto; }
-  .team-member-photo { width: 100px; height: 100px; }
-  .team-member-photo::before { font-size: 2.25rem; }
+  .team-member-card:nth-child(7) {
+    grid-column: auto;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-values {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .story-values .values-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .story-values .value-card {
+    padding: 1.25rem 1.125rem;
+    gap: 1rem;
+  }
+
+  .story-values .value-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .story-values .value-card-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .team-page-section {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .team-members-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 340px;
+  }
+
+  .team-member-card {
+    min-height: auto;
+  }
+
+  .team-member-photo {
+    width: 112px;
+    height: 112px;
+  }
+
+  .team-member-photo::before {
+    font-size: 2.4rem;
+  }
+
+  .team-member-role {
+    max-width: none;
+    width: 100%;
+  }
+
+  .team-member-linkedin {
+    margin-top: 0.4rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .team-members-grid {
+    max-width: 300px;
+    gap: 1.75rem;
+  }
+
+  .team-member-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .team-member-photo::before {
+    font-size: 2.25rem;
+  }
 }
 
 /* ---- Team (index inline grid - kept for any legacy) ---- */
