@@ -578,6 +578,9 @@ button:focus-visible {
     overflow-x: hidden;
     max-width: 100%;
   }
+  .page-main-home {
+    padding-top: var(--mobile-header-offset, 92px);
+  }
   /* Fixed header: full bleed — safe-area on bars (header itself has no bg; padding there showed body white) */
   .header {
     width: 100%;
@@ -601,6 +604,9 @@ button:focus-visible {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+  .page-main-home .hero.hero-carousel {
+    padding-top: 1rem;
   }
   .hero-carousel {
     min-height: auto;
