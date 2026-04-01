@@ -42,10 +42,9 @@
     var slides = heroTrack.querySelectorAll('.hero-slide');
     var totalSlides = slides.length;
     var heroIndex = 0;
-    /* % of track width = index/total — avoids rounded-px drift and horizontal “gap” between slides on iOS */
+    /* % is relative to the track’s own border-box width (= one slide), not sum(slides). So step = 100% per index. */
     function applyHeroTransform() {
-      var pct = totalSlides ? (heroIndex * 100) / totalSlides : 0;
-      heroTrack.style.transform = 'translate3d(-' + pct + '%,0,0)';
+      heroTrack.style.transform = 'translate3d(-' + heroIndex * 100 + '%,0,0)';
     }
     function setHeroSlide(i) {
       heroIndex = (i + totalSlides) % totalSlides;
