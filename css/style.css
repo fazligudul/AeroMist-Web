@@ -595,38 +595,52 @@ button:focus-visible {
 
   .hero.hero-carousel {
     display: block;
-    min-height: 0;
-    padding: 5.5rem 0 4rem;
-    overflow-x: hidden;
+    min-height: auto;
+    padding: 5.5rem 0 2rem;
+    overflow-x: clip;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
   .hero-carousel {
-    min-height: 0;
+    min-height: auto;
+    overflow: clip;
   }
-  /* Clip row wider than screen; flex % width is ambiguous on WebKit */
   .hero-carousel .hero-track {
     min-height: 0;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
-    touch-action: pan-y pinch-zoom;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x pan-y pinch-zoom;
+    overscroll-behavior-x: contain;
+    transition: none;
+  }
+  .hero-carousel .hero-track::-webkit-scrollbar {
+    display: none;
   }
   .hero-carousel .hero-slide {
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;
-    min-width: 0;
+    min-width: 100%;
     box-sizing: border-box;
     justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
-  /* minmax(0,1fr) lets grid shrink below min-content (long headings / letter-spacing) */
   .hero-carousel .hero-slide > .hero-split-inner {
     min-width: 0;
     width: 100%;
     max-width: 100%;
     grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     text-align: center;
   }
   .hero-split-inner {
@@ -637,6 +651,7 @@ button:focus-visible {
   .hero-split-content {
     max-width: none;
     min-width: 0;
+    margin: 0 auto;
   }
   .hero-carousel .hero-split-content {
     max-width: 100%;
@@ -650,26 +665,41 @@ button:focus-visible {
     margin-right: auto;
   }
   .hero-actions {
+    flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions .btn {
+    justify-content: center;
+    width: 100%;
   }
   .hero-split-visual {
     order: -1;
     min-width: 0;
   }
   .hero-visual-card {
-    max-width: min(100%, 320px);
+    width: min(100%, 320px);
+    max-width: 320px;
+    margin: 0 auto;
   }
   .hero-split .hero-title {
+    font-size: clamp(2.6rem, 12vw, 3.7rem);
+    line-height: 1;
     overflow-wrap: anywhere;
     word-wrap: break-word;
   }
   .hero-split .hero-tagline {
+    font-size: 1rem;
+    line-height: 1.6;
     overflow-wrap: break-word;
   }
-  /* Keep text clear of arrow hit area */
   .hero-carousel .container {
-    padding-left: max(1rem, calc(env(safe-area-inset-left, 0px) + 2.75rem));
-    padding-right: max(1rem, calc(env(safe-area-inset-right, 0px) + 2.75rem));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
   }
   .hero-carousel-prev {
     left: max(0.35rem, env(safe-area-inset-left, 0px));
@@ -679,16 +709,24 @@ button:focus-visible {
   }
   .hero-carousel-prev,
   .hero-carousel-next {
-    width: 40px;
-    height: 40px;
+    display: none;
   }
   .hero-carousel-dots {
-    bottom: 1.75rem;
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    justify-content: center;
+    margin: 0.75rem auto 0;
+    padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
   }
   .hero-carousel-dot {
     -webkit-appearance: none;
     appearance: none;
     flex-shrink: 0;
+  }
+  .hero-scroll-hint {
+    display: none;
   }
 
   .chat-fab {
@@ -3427,9 +3465,37 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
+  .top-bar {
+    padding: 0.3rem 0;
+  }
+
+  .top-bar-inner,
+  .nav-inner {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .top-bar-text {
+    display: block;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  .nav-inner {
+    min-height: 56px;
+    gap: 0.75rem;
+  }
+
+  .logo-svg-wrap {
+    width: min(170px, calc(100vw - 88px));
+    height: auto;
+    aspect-ratio: 170 / 36;
+  }
+
   .nav {
     position: fixed;
-    top: 92px;
+    top: var(--mobile-header-offset, 92px);
     left: 0;
     right: 0;
     width: 100%;
@@ -3442,6 +3508,9 @@ button:focus-visible {
     transform: translateY(-120%);
     transition: transform 0.3s ease;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    max-height: calc(100dvh - var(--mobile-header-offset, 92px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .nav.is-open {
@@ -3462,6 +3531,7 @@ button:focus-visible {
 
   .nav-toggle {
     display: flex;
+    flex: 0 0 auto;
   }
 
   .hero {
