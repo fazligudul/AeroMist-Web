@@ -42,14 +42,36 @@
     var slides = heroTrack.querySelectorAll('.hero-slide');
     var totalSlides = slides.length;
     var heroIndex = 0;
+    /* Measured slide width avoids %/track rounding that leaves slides “halfway” on mobile */
+    function heroSlideStepPx() {
+      if (!slides.length) return 0;
+      var w = slides[0].getBoundingClientRect().width;
+      return w > 0.5 ? w : 0;
+    }
+    function applyHeroTransform() {
+      var step = heroSlideStepPx();
+      if (step > 0.5) {
+        heroTrack.style.transform = 'translate3d(' + (-heroIndex * step) + 'px,0,0)';
+      } else {
+        var pct = totalSlides ? (heroIndex * 100) / totalSlides : 0;
+        heroTrack.style.transform = 'translateX(-' + pct + '%)';
+      }
+    }
     function setHeroSlide(i) {
       heroIndex = (i + totalSlides) % totalSlides;
-      heroTrack.style.transform = 'translateX(-' + heroIndex * 100 + '%)';
+      applyHeroTransform();
       heroDotsContainer.querySelectorAll('.hero-carousel-dot').forEach(function (dot, idx) {
         dot.classList.toggle('is-active', idx === heroIndex);
         dot.setAttribute('aria-current', idx === heroIndex ? 'true' : 'false');
       });
     }
+    var si;
+    for (si = 0; si < slides.length; si++) {
+      slides[si].style.removeProperty('flex');
+      slides[si].style.removeProperty('width');
+      slides[si].style.removeProperty('max-width');
+    }
+    heroTrack.style.removeProperty('transform');
     if (totalSlides) {
       for (var d = 0; d < totalSlides; d++) {
         var dot = document.createElement('button');
@@ -61,6 +83,16 @@
         heroDotsContainer.appendChild(dot);
       }
     }
+    setHeroSlide(0);
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(applyHeroTransform);
+    });
+    window.addEventListener('resize', function () {
+      applyHeroTransform();
+    }, { passive: true });
+    window.addEventListener('orientationchange', function () {
+      setTimeout(applyHeroTransform, 200);
+    });
     if (heroPrev) heroPrev.addEventListener('click', function () { setHeroSlide(heroIndex - 1); });
     if (heroNext) heroNext.addEventListener('click', function () { setHeroSlide(heroIndex + 1); });
     var heroTouchStartX = 0;

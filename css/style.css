@@ -566,7 +566,12 @@ button:focus-visible {
   color: var(--gray-500);
 }
 @media (max-width: 900px) {
-  /* Homepage hero carousel only: desktop (>900px) unchanged */
+  /* Hero carousel: narrow viewports only — rules above 901px untouched */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   .hero.hero-carousel {
     display: block;
     min-height: 0;
@@ -579,9 +584,13 @@ button:focus-visible {
   .hero-carousel {
     min-height: 0;
   }
+  /* Clip row wider than screen; flex % width is ambiguous on WebKit */
   .hero-carousel .hero-track {
     min-height: 0;
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    touch-action: pan-y pinch-zoom;
   }
   .hero-carousel .hero-slide {
     flex: 0 0 100%;
@@ -589,24 +598,68 @@ button:focus-visible {
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
+    justify-content: center;
   }
+  /* minmax(0,1fr) lets grid shrink below min-content (long headings / letter-spacing) */
   .hero-carousel .hero-slide > .hero-split-inner {
     min-width: 0;
     width: 100%;
     max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center;
   }
-  .hero-split-inner { grid-template-columns: 1fr; text-align: center; min-width: 0; }
-  .hero-split-content { max-width: none; min-width: 0; }
-  .hero-split .hero-tagline { margin-left: auto; margin-right: auto; }
-  .hero-actions { justify-content: center; }
-  .hero-split-visual { order: -1; min-width: 0; }
-  .hero-visual-card { max-width: min(100%, 320px); }
+  .hero-split-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    min-width: 0;
+  }
+  .hero-split-content {
+    max-width: none;
+    min-width: 0;
+  }
+  .hero-carousel .hero-split-content {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  .hero-carousel .hero-eyebrow {
+    letter-spacing: 0.12em;
+  }
+  .hero-split .hero-tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-split-visual {
+    order: -1;
+    min-width: 0;
+  }
+  .hero-visual-card {
+    max-width: min(100%, 320px);
+  }
   .hero-split .hero-title {
     overflow-wrap: anywhere;
     word-wrap: break-word;
   }
   .hero-split .hero-tagline {
     overflow-wrap: break-word;
+  }
+  /* Keep text clear of arrow hit area */
+  .hero-carousel .container {
+    padding-left: max(1rem, calc(env(safe-area-inset-left, 0px) + 2.75rem));
+    padding-right: max(1rem, calc(env(safe-area-inset-right, 0px) + 2.75rem));
+  }
+  .hero-carousel-prev {
+    left: max(0.35rem, env(safe-area-inset-left, 0px));
+  }
+  .hero-carousel-next {
+    right: max(0.35rem, env(safe-area-inset-right, 0px));
+  }
+  .hero-carousel-prev,
+  .hero-carousel-next {
+    width: 40px;
+    height: 40px;
   }
   .hero-carousel-dots {
     bottom: 1.75rem;
