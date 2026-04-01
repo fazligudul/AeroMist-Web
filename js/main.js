@@ -39,17 +39,25 @@
   var heroPrev = document.querySelector('.hero-carousel-prev');
   var heroNext = document.querySelector('.hero-carousel-next');
   if (heroTrack && heroDotsContainer) {
+    var heroCarouselRoot = document.getElementById('hero-carousel');
     var slides = heroTrack.querySelectorAll('.hero-slide');
     var totalSlides = slides.length;
     var heroIndex = 0;
-    /* Measured slide width avoids %/track rounding that leaves slides “halfway” on mobile */
+    /* One “viewport” = visible track box (matches parent width), not slide rect (iOS subpixel drift) */
     function heroSlideStepPx() {
+      var w = heroTrack.clientWidth;
+      if (w > 0.5) return w;
+      if (heroCarouselRoot && heroCarouselRoot.clientWidth > 0.5) {
+        var pl = parseFloat(getComputedStyle(heroCarouselRoot).paddingLeft) || 0;
+        var pr = parseFloat(getComputedStyle(heroCarouselRoot).paddingRight) || 0;
+        return Math.max(0, heroCarouselRoot.clientWidth - pl - pr);
+      }
       if (!slides.length) return 0;
-      var w = slides[0].getBoundingClientRect().width;
-      return w > 0.5 ? w : 0;
+      return slides[0].getBoundingClientRect().width;
     }
     function applyHeroTransform() {
       var step = heroSlideStepPx();
+      step = step > 0.5 ? Math.round(step) : 0;
       if (step > 0.5) {
         heroTrack.style.transform = 'translate3d(' + (-heroIndex * step) + 'px,0,0)';
       } else {

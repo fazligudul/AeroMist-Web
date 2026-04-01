@@ -570,6 +570,27 @@ button:focus-visible {
   html,
   body {
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    overscroll-behavior-x: none;
+  }
+  #main-content {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  /* Fixed header: full bleed on iOS (avoid side gap when page shifts horizontally) */
+  .header {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .top-bar,
+  .main-nav {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .hero.hero-carousel {
@@ -3406,8 +3427,13 @@ button:focus-visible {
     top: 92px;
     left: 0;
     right: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     background: var(--nav-dark);
     padding: 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
     transform: translateY(-120%);
     transition: transform 0.3s ease;
     border-bottom: 1px solid rgba(255,255,255,0.1);
