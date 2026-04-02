@@ -3045,6 +3045,16 @@ button:focus-visible {
   color: var(--deep-green);
   letter-spacing: -0.02em;
 }
+.pricing-volume-note {
+  margin: -0.1rem 0 1rem;
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  line-height: 1.35;
+}
+.pricing-volume-note strong {
+  color: var(--deep-green);
+  font-weight: 700;
+}
 .pricing-card-subtitle {
   font-size: 0.9375rem;
   color: var(--gray-600);
@@ -3090,6 +3100,9 @@ button:focus-visible {
   .pricing-cards {
     grid-template-columns: 1fr;
     max-width: 400px;
+  }
+  .pricing-volume-note {
+    font-size: 0.9rem;
   }
 }
 
