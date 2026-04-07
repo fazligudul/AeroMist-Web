@@ -261,6 +261,9 @@ button:focus-visible {
   cursor: pointer;
   padding: 0.5rem;
 }
+.nav-mobile-only {
+  display: none;
+}
 .nav-toggle span {
   width: 22px;
   height: 2px;
@@ -3575,6 +3578,10 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
+  .nav-mobile-only {
+    display: list-item;
+  }
+
   .top-bar {
     padding: 0.3rem 0;
   }
